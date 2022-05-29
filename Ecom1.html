@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #form{
+            width: 20%;
+            /* background-color: blanchedalmond; */
+            margin: auto;
+            /* margin-top: 10%; */
+        }
+        #form>input{
+            margin-top: 10px;
+        }
+        #form>select{
+            width: 50%;
+            /* margin-left: 50/px; */
+            margin-top: 10px;
+        }
+        tbody>img{
+            width: 20%;
+        }
+        #container{
+            display: grid;
+            grid-template-columns: repeat(4, 350px);
+            grid-template-rows: (auto, 450px);
+            gap: 10px;
+        }
+        
+    </style>
+</head>
+<body>
+    <form action="" id="form" onsubmit="myFun(event)">
+    <input id="name" type="text" placeholder="Product Name"><br>
+    <input id="category" type="text" placeholder="Category"><br>
+    <input id="image" type="text" placeholder="Image Url"><br>
+    <input id="price" type="text" placeholder="Price"><br>
+    <select id="gender" name="" id=""><br>
+        <option value="">Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+    </select>
+    sold<input id="sold" type="checkbox" value="Sold">
+    <br>
+    <input id="add" type="submit" value="Submit">
+    </form>
+
+    <div id="container"></div>
+</body>
+</html>
+<script>
+    var arr =JSON.parse(localStorage.getItem("Products"))||[];
+gettingData(arr)
+    function cons(n, c, i, p, g, s){
+        this.name = n;
+        this.category = c;
+        this.image = i;
+        this.price = p;
+        this.gender = g;
+        this.sold = s;
+    }
+
+function myFun(e){
+    e.preventDefault()
+    var name = form.name.value;
+    var category = form.category.value;
+    var image = form.image.value;
+    var price = form.price.value;
+    var gender = form.gender.value;
+    var sold = form.sold.value;
+
+
+    var con = new cons(name, category, image, price, gender, sold)
+
+    
+
+    arr.push(con);
+    console.log(arr)
+
+    localStorage.setItem("Products", JSON.stringify(arr))
+    // gettingData(arr)
+}
+
+
+function gettingData(data){
+    // document.querySelector("tbody").innerHTML="";
+    data.map(function(ele){
+                // var container = document.getElementById("container")
+        var tbro = document.createElement("div");
+
+        var td1 = document.createElement("h3");
+        td1.innerText = ele.name
+
+        var td2 = document.createElement("p");
+        td2.innerText = ele.category
+
+        var td3 = document.createElement("img");
+        td3.src = ele.image;
+
+        var td4 = document.createElement("p");
+        td4.innerText = ele.price
+
+        var td5 = document.createElement("p");
+        td5.innerText = ele.gender
+        
+        var td6 = document.createElement("checkbox")
+        td6.innerText = ele.sold
+
+        tbro.append(td3, td1, td2, td4, td5, td6);
+        document.querySelector("#container").append(tbro)
+
+
+    });
+};
+
+
+
+// <table border="1" cellspacing="0">
+//         <thead>
+//             <tr>
+//                 <td>Name</td>
+//                 <td>Category</td>
+//                 <td>Image</td>
+//                 <td>Price</td>
+//                 <td>Gender</td>
+//                 <td>Sold</td>
+//             </tr>
+//         </thead>
+//         <tbody>
+
+//         </tbody>
+//     </table>
+</script>

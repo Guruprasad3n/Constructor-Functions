@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    function Person(n,c,s){
+        this.name=n;
+        this.city=c;
+        this.skill=s;
+    }
+
+
+    let amar = new Person("amar", "Goa" ,"Singer");
+    let akbar = new Person("akbar", "Mumbai", "Chef");
+    let anthony = new Person("anthony","Kashmir","Magician");
+
+
+    let amar1 = new Person("amar", "Goa" ,"Singer");
+    let akbar1 = new Person("akbar", "Mumbai", "Chef");
+    let anthony1 = new Person("anthony","Kashmir","Magician");
+
+    function borrowSkill(skill){
+        console.log(`Now ${this.name} is also a ${skill}`)
+    }
+
+    borrowSkill.call(amar,akbar.skill);
+    borrowSkill.call(akbar,amar.skill);
+    borrowSkill.call(amar,anthony.skill);
+    borrowSkill.call(anthony,akbar.skill);
+
+
+
+</script>
